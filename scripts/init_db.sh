@@ -12,10 +12,11 @@ DB_NAME="${POSTGRES_DB:=newsletter}"
 DB_PORT="${POSTGRES_PORT:=5432}"
 
 # Set the path to psql.exe
-PATH_PSQL="C:\Program Files\PostgreSQL\16\bin"
-
-# Add PATH_PSQL to PATH
-export PATH="$PATH:$PATH_PSQL"
+if ! [[ -z "${CI_CD_PIPELINE}" ]]; then
+    PATH_PSQL="C:\Program Files\PostgreSQL\16\bin"
+    # Add PATH_PSQL to PATH
+    export PATH="$PATH:$PATH_PSQL"
+fi
 
 if ! [ -x "$PATH_PSQL" ]; then 
     echo >&2 "Error: psql is not found at $PATH" 
