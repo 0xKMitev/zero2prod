@@ -2,5 +2,24 @@
 name = "zero2prod"
 version = "0.1.0"
 edition = "2021"
+authors = ["Kaloyan"]
+
+[lib] 
+path = "src/lib.rs"
+
+[[bin]] 
+path = "src/main.rs" 
+name = "zero2prod"
 
 [dependencies]
+actix-web = "4.9.0"
+chrono = "0.4.38"
+config = "0.14.1"
+reqwest = "0.12.8"
+serde = { version = "1.0.213", features = ["derive"] }
+uuid = { version = "1.11.0", features = ["v4"] }
+
+[dependencies.sqlx] 
+version = "0.8.1" 
+default-features = false 
+features = [ "runtime-async-std", "macros", "postgres", "uuid", "chrono", "migrate" ]
