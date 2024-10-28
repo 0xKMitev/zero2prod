@@ -18,10 +18,11 @@ if ! [[ -z "${CI_CD_PIPELINE}" ]]; then
     export PATH="$PATH:$PATH_PSQL"
 fi
 
-if ! [ -x "$PATH_PSQL" ]; then 
-    echo >&2 "Error: psql is not found at $PATH" 
-    exit 1 
-fi 
+if ! command -v psql >/dev/null 2>&1; then
+    echo >&2 "Error: psql is not installed"
+    echo >&2 "Please install PostgreSQL client tools"
+    exit 1
+fi
 if ! [ -x "$(command -v sqlx)" ]; then 
     echo >&2 "Error: sqlx is not installed."
     echo >&2 "Use:"
